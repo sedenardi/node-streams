@@ -1,21 +1,34 @@
 var ReadStream = require('./lib/readStream.js');
 
-var rs = new ReadStream();
+var startNonFlowing = function(cb) {
+  console.log('starting read stream in non-flowing mode.');
+  var rs = new ReadStream();
+  var count = 0;
+  rs.on('end', function() {
+    console.log('done with read stream in non-flowing mode. ' + count + ' records.\n');
+    cb();
+  });
+  /**** non-flowing mode ****/
+  rs.on('readable', function() {
+    while (null !== (record = rs.read())) {
+      console.log('received         : ' + JSON.stringify(record));
+      count++;
+    }
+  });
+};
 
-var count = 0;
-rs.on('end', function() {
-  console.log('done with read stream. ' + count + ' records.');
-});
-/**** non-flowing mode ****/
-rs.on('readable', function() {
-  while (null !== (record = rs.read())) {
-    console.log('received: ' + JSON.stringify(record));
+var startFlowing = function() {
+  console.log('starting read stream in flowing mode.');
+  var rs = new ReadStream();
+  var count = 0;
+  rs.on('end', function() {
+    console.log('done with read stream in flowing mode. ' + count + ' records.\n');
+  });
+  /**** flowing mode ****/
+  rs.on('data', function(record) {
+    console.log('received         : ' + JSON.stringify(record));
     count++;
-  }
-});
+  });
+};
 
-/**** flowing mode ****/
-/*rs.on('data', function(record) {
-  console.log('received: ' + JSON.stringify(record));
-  count++;
-});*/
+startNonFlowing(startFlowing);
