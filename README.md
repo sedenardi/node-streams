@@ -2,7 +2,7 @@
 Read, write and transform stream examples for node.
 
 #### lib/readStream.js
-Readable stream of objects. Source data is found in the `data-sources` folder (created by `create-source`).
+Readable stream of objects. Source data is found in the `data-sources` folder (created by `create-source.js`).
 
 #### lib/writeStream.js
 Writable stream that outputs incoming objects to the console.
