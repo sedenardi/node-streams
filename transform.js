@@ -4,6 +4,7 @@ var ReadStream = require('./lib/readStream.js'),
 
 var rs = new ReadStream();
 var ws = new WriteStream();
-var ts = new TransformStream();
+var ts1 = new TransformStream();
+var ts2 = new TransformStream();
 
-rs.pipe(ts).pipe(ws);
+rs.pipe(ts1).pipe(ts2).pipe(ws);

@@ -10,7 +10,7 @@ Readable stream of objects. Source data is found in the `data-sources` folder (c
 Writable stream that outputs incoming objects to the console.
 
 #### lib/transformStream.js
-Transform stream that changes an object's `name` field and adds a random integer to a new `newValue` field.
+Transform stream that stores the original `value` in `originalValue` and increments the `value` field.
 
 ### Examples
 
